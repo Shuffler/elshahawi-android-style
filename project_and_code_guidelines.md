@@ -1,12 +1,8 @@
 # 1. Project guidelines
 
-## 1.1 Project structure
+## 1.1 File naming
 
-New projects should follow the Android Gradle project structure that is defined on the [Android Gradle plugin user guide](http://tools.android.com/tech-docs/new-build-system/user-guide#TOC-Project-Structure). The [ribot Boilerplate](https://github.com/ribot/android-boilerplate) project is a good reference to start from.
-
-## 1.2 File naming
-
-### 1.2.1 Class files
+### 1.1.1 Class files
 Class names are written in [UpperCamelCase](http://en.wikipedia.org/wiki/CamelCase).
 
 For classes that extend an Android component, the name of the class should end with the name of the component; for example: `SignInActivity`, `SignInFragment`, `ImageUploaderService`, `ChangePasswordDialog`.
@@ -22,23 +18,11 @@ Naming conventions for drawables:
 
 | Asset Type   | Prefix            |		Example               |
 |--------------| ------------------|-----------------------------|
-| Action bar   | `ab_`             | `ab_stacked.9.png`          |
-| Button       | `btn_`	            | `btn_send_pressed.9.png`    |
-| Dialog       | `dialog_`         | `dialog_top.9.png`          |
-| Divider      | `divider_`        | `divider_horizontal.9.png`  |
-| Icon         | `ic_`	            | `ic_star.png`               |
-| Menu         | `menu_	`           | `menu_submenu_bg.9.png`     |
-| Notification | `notification_`	| `notification_bg.9.png`     |
-| Tabs         | `tab_`            | `tab_pressed.9.png`         |
-
-| Asset Type                      | Prefix             | Example                      |
-| --------------------------------| ----------------   | ---------------------------- |
-| Icons                           | `ic_`              | `ic_star.png`                |
-| Launcher icons                  | `ic_launcher`      | `ic_launcher_calendar.png`   |
-| Menu icons and Action Bar icons | `ic_menu`          | `ic_menu_archive.png`        |
-| Status bar icons                | `ic_stat_notify`   | `ic_stat_notify_msg.png`     |
-| Tab icons                       | `ic_tab`           | `ic_tab_recent.png`          |
-| Dialog icons                    | `ic_dialog`        | `ic_dialog_info.png`         |
+| Icon         | `ic_`	            | `ic_star_32dp.png`               |
+| Image        	| `img_`             | `img_logo.png`          |
+| Button background      | `btn_`	            | `btn_send_pressed.9.png`    |
+| Divider      | `divider_`        | `divider_dark.png`  |
+| Selector	| `selector_`		| `selector_btn_send.xml`
 
 Naming conventions for selector states:
 
@@ -53,28 +37,20 @@ Naming conventions for selector states:
 
 #### 1.2.2.2 Layout files
 
-Layout files should match the name of the Android components that they are intended for but moving the top level component name to the beginning. For example, if we are creating a layout for the `SignInActivity`, the name of the layout file should be `activity_sign_in.xml`.
+Layout files should match the name of the Android components that they are intended for:
 
 | Component        | Class Name             | Layout Name                   |
 | ---------------- | ---------------------- | ----------------------------- |
-| Activity         | `UserProfileActivity`  | `activity_user_profile.xml`   |
-| Fragment         | `SignUpFragment`       | `fragment_sign_up.xml`        |
-| Dialog           | `ChangePasswordDialog` | `dialog_change_password.xml`  |
-| AdapterView item | ---                    | `item_person.xml`             |
-| View / ViewGroup | `SliderView`           | `view_slider.xml`             |
+| Activity         | `UserProfileActivity`  | `user_profile_activity.xml`   |
+| Fragment         | `SignUpFragment`       | `sign_up_fragment.xml`        |
+| Dialog           | `ChangePasswordDialog` | `change_password_dialog.xml`  |
+| AdapterView item | ---                    | `visit_list_item.xml`             |
+| View / ViewGroup | `SliderView`           | `slider_view.xml`             |
 | Partial layout   | ---                    | `partial_stats_bar.xml`       |
-
-A slightly different case is when we are creating a layout that is going to be inflated by an `Adapter`, e.g to populate a `ListView`. In this case, the name of the layout should start with `item_`.
-
-Other case is when layout is intended to be inflated as View or ViewGroup custom implementation layout. In this case `view_` prefix should be used.
-
-Note that there are cases where these rules will not be possible to apply. For example, when creating layout files that are intended to be part of other layouts. In this case you should use the prefix `partial_`.
 
 #### 1.2.2.3 Menu files
 
-Similar to layout files, menu files should match the name of the component. For example, if we are defining a menu file that is going to be used in the `UserActivity`, then the name of the file should be `activity_user.xml`
-
-A good practice is to not include the word `menu` as part of the name because these files are already located in the `menu` directory.
+Similar to layout files, menu files should match the name of the component. For example, if we are defining a menu file that is going to be used in the `UserActivity`, then the name of the file should be `user_activity.xml`
 
 #### 1.2.2.4 Values files
 
@@ -118,30 +94,18 @@ try {
 See the reason why and some alternatives [here](https://source.android.com/source/code-style.html#dont-catch-generic-exception).
 If you still decide to do this, write a comment why this is a good idea.
 
-### 2.1.3 Don't use finalizers
-
-_We don't use finalizers. Read more: [Android code style guidelines](https://source.android.com/source/code-style.html#dont-use-finalizers)_
-
-### 2.1.4 Fully qualify imports
-
-This is bad: `import foo.*;`
-
-This is good: `import foo.Bar;`
-
-See more info [here](https://source.android.com/source/code-style.html#fully-qualify-imports).
-
-### 2.1.5 Avoid Serialization and Deserialization
+### 2.1.3 Avoid Serialization and Deserialization
 
 _Serialization and deserialization of objects is a CPU-intensive procedure and is likely to slow down your application. While performance loss won't be visible on small objects beware of serialization and deserialization of large lists of objects.
 Preferable approach is to use [Parcelable](https://developer.android.com/reference/android/os/Parcelable.html)._
 
-### 2.1.6 Avoid Synchronized
+### 2.1.4 Avoid Synchronized
 
 Synchronization has hight performance cost in java and improper synchronization can also cause a deadlock.
 So use synchronization if you are truly dealing with multithreaded processes and doing so follow the guidelines.
 You can read more detailed guidelines here: [Java Language Best Practices](http://docs.oracle.com/cd/A97688_16/generic.903/bp/java.htm#1006832)
 
-#### 2.1.6.1 Synchronize Critical Sections Only
+#### 2.1.4.1 Synchronize Critical Sections Only
 
 If only certain operations in the method must be synchronized, use a synchronized block with a lock instead of synchronizing the entire method. For example:
 ```
@@ -159,11 +123,8 @@ private final Object lock = new Object();
     }
 ```
 
-#### 2.1.6.2 Know Which Java Objects Already Have Synchronization Built-in
+#### 2.1.4.2 Know Which Java Objects Already Have Synchronization Built-in
 Some Java objects (such as Hashtable, Vector, and StringBuffer) already have synchronization built into many of their APIs. They may not require additional synchronization.
-
-#### 2.1.6.3 Do Not Under-Synchronize
-Some Java variables and operations are not atomic. If these variables or operations can be used by multiple threads, you must use synchronization to prevent data corruption. For example: (i) Java types long and double are comprised of eight bytes; any access to these fields must be synchronized. (ii) Operations such as ++ and -- must be synchronized because they represent a read and a write, not an atomic operation.
 
 ## 2.2 Java style rules
 
@@ -287,7 +248,7 @@ _Local variables should be declared at the point they are first used. Nearly eve
 
 ### 2.2.7 Logging guidelines
 
-VERBOSE and DEBUG logs __must__ be disabled on release builds. It is also recommended to disable INFORMATION, WARNING and ERROR logs but you may want to keep them enabled if you think they may be useful to identify issues on release builds. If you decide to leave them enabled, you have to make sure that they are not leaking private information such as email addresses, user ids, etc.
+VERBOSE and DEBUG logs __must__ be disabled on release builds. It is also recommended to disable INFORMATION, WARNING and ERROR. If you decide to leave them enabled, you have to make sure that they are not leaking private information such as email addresses, user ids, etc.
 
 ### 2.2.8 Class member ordering
 
@@ -397,9 +358,6 @@ When using one of these components, you __must__ define the keys as a `static fi
 | Intent Action      | `ACTION_`           |
 | Activity result extras | `RESULT_`           |
 
-Note that the arguments of a Fragment - `Fragment.getArguments()` - are also a Bundle. However, because this is a quite common use of Bundles, we define a different prefix for them.
-Also use `RESULT_` prefix for Activity result intents.
-
 Example:
 
 ```java
@@ -415,6 +373,29 @@ static final String RESULT_SURNAME = "RESULT_SURNAME";
 static final String ACTION_OPEN_USER = "com.myapp.action.ACTION_OPEN_USER";
 ```
 
+Constant can be avoided if string key is used only once to access value and only internally in a class:
+
+```java
+public class DetailsFragment extends Fragment {
+
+  public static DetailsFragment newInstance(String id) {
+    DetailsFragment f = new DetailsFragment();
+    Bundle args = new Bundle();
+    args.put("id", id);
+    f.setArguments(args);
+    return f;
+  }
+
+  @Override
+  public void onCreate(Bundle savedInstanceState) {
+    String id = getArguments().getString("id");
+    ...
+  }
+
+}
+```
+
+
 ### 2.2.11 Arguments in Fragments and Activities
 
 When data is passed into an `Activity `or `Fragment` via an `Intent` or a `Bundle`, the keys for the different values __must__ follow the rules described in the section above.
@@ -424,18 +405,18 @@ When an `Activity` or `Fragment` expects arguments, it should provide a `public 
 In the case of __Activities__ the method is usually called `getStartIntent()`:
 
 ```java
-public static Intent getStartIntent(Context context, User user) {
+public static Intent getIntent(Context context, User user) {
 	Intent intent = new Intent(context, ThisActivity.class);
-	intent.putParcelableExtra(EXTRA_USER, user);
+	intent.putParcelableExtra("user", user);
 	return intent;
 }
 ```
 
-For retrieving extras use getter with 'Extra' prefix:
+Then the getter can be used to retrieve extas:
 
 ```java
-private User getExtraUser() {
-    return getIntent().getParcelableExtra(EXTRA_USER);
+private User getUserExtra() {
+    return getIntent().getParcelableExtra("user");
 }
 ```
 
@@ -445,39 +426,17 @@ For __Fragments__ it is named `newInstance()` and handles the creation of the Fr
 public static UserFragment newInstance(User user) {
     UserFragment fragment = new UserFragment;
     Bundle args = new Bundle();
-    args.putParcelable(ARG_USER, user);
+    args.putParcelable("user", user);
     fragment.setArguments(args)
     return fragment;
 }
 ```
 
-__Note__: If we provide the methods described above, the keys for extras and arguments should be `private` because there is not need for them to be exposed outside the class.
-
-For retrieving fragment arguments use getter method with 'Arg' prefix:
-
-```java
-private User getArgUser() {
-    // No need for getArguments() == null check as long as
-    // there is no newInstance method with zero args.
-    return getArguments().getParcelable(ARG_USER);
-}
-```
-
-
 ### 2.2.12 Android View subclass naming
 
 It is very common to instantiate views in Fragment's `onCreateView()` method and declare them as class variables. But the naming of these variable could be tricky in some cases.
+To avoid confusion and to group different views by their type a simple rule should be applied: View variable name should be prefixed with its type shortening. For example:
 
-For example:
-```java
-
-    // BAD EXAMPLE!
-    // The view nameText and a String can be confused with each other.
-    private String name;
-    private TextView nameText;
-
-```
-To avoid this confusion and to group different views by their type a simple rule should be applied: View variable name should be prefixed with its type shortening. For example:
 ```java
     // tv stands for TextView
     private TextView tvName, tvEmail;
@@ -516,57 +475,9 @@ There are two __exceptions__ where it is possible to have lines longer than 100:
 * Lines that are not possible to split, e.g. long URLs in comments.
 * `package` and `import` statements.
 
-#### 2.2.14.1 Line-wrapping strategies
+Line length is not a strick rule, but it's recommended to follow it to enhance readability.
 
-There isn't an exact formula that explains how to line-wrap and quite often different solutions are valid. However there are a few rules that can be applied to common cases.
 
-__Break at operators__
-
-When the line is broken at an operator, the break comes __before__ the operator. For example:
-
-```java
-int longName = anotherVeryLongVariable + anEvenLongerOne - thisRidiculousLongOne
-        + theFinalOne;
-```
-
-__Assignment Operator Exception__
-
-An exception to the `break at operators` rule is the assignment operator `=`, where the line break should happen __after__ the operator.
-
-```java
-int longName =
-        anotherVeryLongVariable + anEvenLongerOne - thisRidiculousLongOne + theFinalOne;
-```
-
-__Method chain case__
-
-When multiple methods are chained in the same line - for example when using Builders - every call to a method should go in its own line, breaking the line before the `.`
-
-```java
-Picasso.with(context).load("http://ribot.co.uk/images/sexyjoe.jpg").into(imageView);
-```
-
-```java
-Picasso.with(context)
-        .load("http://ribot.co.uk/images/sexyjoe.jpg")
-        .into(imageView);
-```
-
-__Long parameters case__
-
-When a method has many parameters or its parameters are very long, we should break the line after every comma `,`
-
-```java
-loadPicture(context, "http://ribot.co.uk/images/sexyjoe.jpg", mImageViewProfilePicture, clickListener, "Title of the picture");
-```
-
-```java
-loadPicture(context,
-        "http://ribot.co.uk/images/sexyjoe.jpg",
-        mImageViewProfilePicture,
-        clickListener,
-        "Title of the picture");
-```
 
 ### 2.2.15 RxJava chains styling
 
@@ -621,53 +532,13 @@ This is __bad__ :
 
 Resource IDs and names are written in __lowercase_underscore__.
 
-#### 2.3.2.1 ID naming
-
-IDs should be prefixed with a shortening of element type in lowercase underscore. For example:
-
-
-| Element            | Prefix            |
-| -----------------  | ----------------- |
-| `TextView`         | `tv_`             |
-| `ImageView`        | `iv_`             |
-| `Button`           | `b_`              |
-| `ViewGroup`	     | `w_`
-
-Image view example:
-
-```xml
-<ImageView
-    android:id="@+id/iv_profile"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" />
-```
-
-Use `w_` for wrappers, a.k.a. ViewGroups. For example:
-
-```xml
-<LinearLayout
-    android:id="@+id/w_user_data"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" />
-```
-
-Menu items id should be prefixed with `menu_`. For example:
-
-```xml
-<menu>
-	<item
-        android:id="@+id/menu_done"
-        android:title="Done" />
-</menu>
-```
-
 #### 2.3.2.2 Styles and Themes
 
 Style names are written in __UpperCamelCase__ and should be prefixed with project name or project name shortening. Also style names should be divided by `.` into logical pieces, for example:
 ```xml
-<style name="MPay.Theme.Light"/>
-<style name="MPay.Text.Header1"/>
-<style name="MPay.Button.Flat"/>
+<style name="Htg.Theme.Light"/>
+<style name="Htg.Text.Header1"/>
+<style name="Htg.Button.Flat"/>
 ```
 
 #### 2.3.2.3 Colors
@@ -685,16 +556,6 @@ For colors with a specified alpha value, append opacity percentage as a two digi
 ```
 
 Determine percentage from hex value [here](http://online.sfsu.edu/chrism/hexval.html).
-
-### 2.3.3 Attributes ordering
-
-As a general rule you should try to group similar attributes together. A good way of ordering the most common attributes is:
-
-1. View Id
-2. Style
-3. Layout width and layout height
-4. Other layout attributes, sorted alphabetically
-5. Remaining attributes, sorted alphabetically
 
 ### 2.3.4 Use design time layout attributes
 
@@ -731,21 +592,9 @@ To achieve this use __tools__ namespace:
 
 ### 2.3.5 Use of dimension resources
 
-All components align to an 8dp square baseline grid. Iconography in toolbars align to a 4dp square baseline grid. Dimensions that can be reused must be stored in dimension resources, to keep projects visual design language consistent.
+All components align to an 8dp square baseline grid. Iconography in toolbars align to a 4dp square baseline grid. Dimensions that can be reused must be stored in dimension resources.
 
-#### 2.3.5.1 Use common dimension resources
-
-Use common dimension resources for view paddings and margins to make layouts consistent and better adapt to different screen configurations.
-
-| Margins | Paddings |
-| --- | --- |
-| `margin_xs` | `padding_xs` |
-| `margin_s` | `padding_s` |
-| `margin_m` | `padding_m` |
-| `margin_l` | `padding_l` |
-| `margin_xl` | `padding_xl` |
-
-#### 2.3.5.2 Use screen margin dimension resources
+#### 2.3.5.1 Use screen margin dimension resources
 
 Use screen margin dimensions for content container that matches screen size. This will provide more appropriate and distinct layout for large screen configurations with minimal effort when separate layout file is not required.
 
@@ -753,22 +602,6 @@ Use screen margin dimensions for content container that matches screen size. Thi
 | --- | --- | --- | --- |
 | `screen_margin_horizontal` | `0dp` | `64dp` | `80dp` |
 | `screen_margin_vertical` | `0dp` | `40dp` | `64dp`|
-
-If container view is __scrollable__, `screen_margin_vertical` dimension value should be used as vertical padding instead of margin in conjunction with `clipToPadding` attribute value set to __false__, for example:
-
-```xml
-...
-<RecyclerView
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginLeft="@dimen/screen_margin_horizontal"
-    android:layout_marginRight="@dimen/screen_margin_horizontal"
-    android:clipToPadding="false"
-    android:paddingTop="@dimen/screen_margin_vertical"
-    android:paddingBottom="@dimen/screen_margin_vertical" />
-...
-```
 
 Screen margin dimensions can also be __used as padding__ to achieve same visual result when content container is top level container, for example:
 
