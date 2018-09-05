@@ -511,7 +511,7 @@ This is good:
 
 ```xml
 <TextView
-    android:id="@+id/tv_view_profile"
+    android:id="@+id/tvProfile"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content" />
 ```
@@ -582,7 +582,7 @@ To achieve this use __tools__ namespace:
 
         //Set sample text if text field is empty initially.
         <EditText
-            android:id="@+id/et_username"
+            android:id="@+id/etUserName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="John Dao"/>
