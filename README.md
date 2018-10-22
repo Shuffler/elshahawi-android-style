@@ -56,6 +56,17 @@ Similar to layout files, menu files should match the name of the component. For 
 
 Resource files in the values folder should be __plural__, e.g. `strings.xml`, `styles.xml`, `colors.xml`, `dimens.xml`, `attrs.xml`
 
+#### 1.2.2.5 Resource ids
+
+Naming conventions for ids, Similar to how you declare them in as Java variables
+Check [2.2.12 Android View subclass naming](https://github.com/TallShahawi/kazaky-android-style/blob/master/README.md#2212-android-view-subclass-naming)
+
+| View Type    | Example           |
+| ------------ | ----------------- |
+| Button       | `@+id/bActivate`  |
+| ImageView    | `@+id/ivProfile`  |
+
+
 # 2 Code guidelines
 
 ## 2.1 Java language rules
